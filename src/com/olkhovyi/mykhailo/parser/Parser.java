@@ -1,9 +1,6 @@
 package com.olkhovyi.mykhailo.parser;
 
-import com.olkhovyi.mykhailo.ast.BinaryExpression;
-import com.olkhovyi.mykhailo.ast.Expression;
-import com.olkhovyi.mykhailo.ast.NumberExpression;
-import com.olkhovyi.mykhailo.ast.UnaryExpression;
+import com.olkhovyi.mykhailo.ast.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +79,9 @@ public class Parser {
         }
         if (match(TokenType.HEX)) {
             return new NumberExpression(Long.parseLong(current.getText(), 16));
+        }
+        if (match(TokenType.WORD)) {
+            return new ConstantExpression(current.getText());
         }
         if (match(TokenType.LPAREN)) {
             Expression result =  expression();

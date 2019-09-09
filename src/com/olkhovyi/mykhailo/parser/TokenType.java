@@ -4,6 +4,7 @@ public enum TokenType {
 
     NUMBER,
     HEX,
+    WORD,
 
     PLUS,
     MINUS,
