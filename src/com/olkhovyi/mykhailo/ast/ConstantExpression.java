@@ -1,6 +1,6 @@
 package com.olkhovyi.mykhailo.ast;
 
-import com.olkhovyi.mykhailo.lib.Constants;
+import com.olkhovyi.mykhailo.lib.Variables;
 
 public class ConstantExpression implements Expression {
     private final String name;
@@ -11,12 +11,12 @@ public class ConstantExpression implements Expression {
 
     @Override
     public double eval() {
-        if (!Constants.isExists(name)) throw new RuntimeException("Такої константи не існує");
-        return Constants.get(name);
+        if (!Variables.isExists(name)) throw new RuntimeException("Такої константи не існує");
+        return Variables.get(name);
     }
 
     @Override
     public String toString() {
-        return String.format("%f", Constants.get(name));
+        return String.format("%f", Variables.get(name));
     }
 }

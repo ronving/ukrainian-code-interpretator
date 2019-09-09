@@ -10,6 +10,7 @@ public enum TokenType {
     MINUS,
     STAR,
     SLASH,
+    EQ,
 
     LPAREN,
     RPAREN,

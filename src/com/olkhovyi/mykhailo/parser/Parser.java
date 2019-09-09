@@ -18,12 +18,26 @@ public class Parser {
         size = tokens.size();
     }
 
-    public List<Expression> parse () {
-        final List<Expression> result = new ArrayList<>();
+    public List<Statement> parse () {
+        final List<Statement> result = new ArrayList<>();
         while(!match(TokenType.EOF)) {
-            result.add(expression());
+            result.add(statement());
         }
         return result;
+    }
+
+    private Statement statement() {
+        return assignmentStatement();
+    }
+
+    private Statement assignmentStatement() {
+        final Token current = get(0);
+        if(match(TokenType.WORD) && get(0).getType() == TokenType.EQ) {
+            final String variable = current.getText();
+            consume(TokenType.EQ);
+            return new AssignmentStatement(variable, expression());
+        }
+        throw new RuntimeException("Невідомий оператор");
     }
 
     private Expression expression() {
@@ -89,6 +103,16 @@ public class Parser {
             return result;
         }
         throw new RuntimeException("Невідомий вираз");
+    }
+
+    private Token consume(TokenType type) {
+        final Token current = get(0);
+
+        if (type != current.getType()) {
+            throw new RuntimeException("Токен " + current.getType() + " не співпадає з " + type);
+        }
+        pos++;
+        return current;
     }
 
     private boolean match(TokenType type) {
