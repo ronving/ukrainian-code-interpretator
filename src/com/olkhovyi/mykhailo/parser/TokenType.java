@@ -5,6 +5,7 @@ public enum TokenType {
     NUMBER,
     HEX,
     WORD,
+    TEXT,
 
     PRINT,
 

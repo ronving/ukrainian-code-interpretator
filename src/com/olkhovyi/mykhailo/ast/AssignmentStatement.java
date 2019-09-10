@@ -1,5 +1,6 @@
 package com.olkhovyi.mykhailo.ast;
 
+import com.olkhovyi.mykhailo.lib.Value;
 import com.olkhovyi.mykhailo.lib.Variables;
 
 public class AssignmentStatement implements Statement {
@@ -14,7 +15,7 @@ public class AssignmentStatement implements Statement {
 
     @Override
     public void execute() {
-        final double result = exp.eval();
+        final Value result = exp.eval();
         Variables.set(variable, result);
     }
 

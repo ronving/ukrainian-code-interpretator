@@ -39,6 +39,10 @@ public class Lexer {
                 next();
                 tokenizeHexNumber();
             }
+            else if (current == '"') {
+                next();
+                tokenizeText();
+            }
             else if (OPERATOR_CHARS.indexOf(current) != -1) {
                 tokenizeOperator();
             }
@@ -47,6 +51,31 @@ public class Lexer {
             }
         }
         return tokens;
+    }
+
+    private void tokenizeText() {
+        final StringBuilder buffer = new StringBuilder();
+        char current = peek(0);
+        while(true) {
+            if (current == '\\') {
+                current = next();
+                switch (current) {
+                    case '"': current = next(); buffer.append('"'); continue;
+                    case 'n': current = next(); buffer.append('\n'); continue;
+                    case 't': current = next(); buffer.append('\t'); continue;
+                }
+                buffer.append('\\');
+                continue;
+            }
+            if(current == '"') {
+                break;
+            }
+            buffer.append(current);
+            current = next();
+        }
+        next(); //skip closing "
+
+        addToken(TokenType.TEXT, buffer.toString());
     }
 
     private void tokenizeWord() {
