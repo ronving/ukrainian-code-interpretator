@@ -1,5 +1,7 @@
 package com.olkhovyi.mykhailo.ast;
 
+import com.olkhovyi.mykhailo.lib.Value;
+
 public class UnaryExpression implements Expression {
 
     private final Expression exp;
@@ -13,16 +15,16 @@ public class UnaryExpression implements Expression {
 
 
     @Override
-    public double eval() {
+    public Value eval() {
         switch(operation) {
-            case '-': return -exp.eval();
+            case '-': return new NumberValue(-exp.eval().asDouble()) ;
             case '+':
-            default: return exp.eval();
+            default: return new NumberValue(exp.eval().asDouble()) ;
         }
     }
 
     @Override
     public String toString() {
-        return String.format("%s", Double.toString(eval()));
+        return String.format("%c%s", operation, exp);
     }
 }

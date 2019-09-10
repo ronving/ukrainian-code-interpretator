@@ -1,5 +1,6 @@
 package com.olkhovyi.mykhailo.ast;
 
+import com.olkhovyi.mykhailo.lib.Value;
 import com.olkhovyi.mykhailo.lib.Variables;
 
 public class VariableExpression implements Expression {
@@ -10,7 +11,7 @@ public class VariableExpression implements Expression {
     }
 
     @Override
-    public double eval() {
+    public Value eval() {
         if (!Variables.isExists(name)) throw new RuntimeException("Такої константи не існує");
         return Variables.get(name);
     }

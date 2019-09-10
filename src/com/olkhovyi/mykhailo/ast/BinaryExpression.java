@@ -1,5 +1,7 @@
 package com.olkhovyi.mykhailo.ast;
 
+import com.olkhovyi.mykhailo.lib.Value;
+
 public final class BinaryExpression implements Expression {
 
     private Expression exp1, exp2;
@@ -13,13 +15,15 @@ public final class BinaryExpression implements Expression {
     }
 
     @Override
-    public double eval() {
+    public Value eval() {
+        final double num1 = exp1.eval().asDouble();
+        final double num2 = exp2.eval().asDouble();
         switch(operation) {
-            case '-': return exp1.eval() - exp2.eval();
-            case '*': return exp1.eval() * exp2.eval();
-            case '/': return exp1.eval() / exp2.eval();
+            case '-': return new NumberValue(num1 - num2);
+            case '*': return new NumberValue(num1 * num2);
+            case '/': return new NumberValue(num1 / num2);
             case '+':
-                default: return exp1.eval() + exp2.eval();
+                default: return new NumberValue(num1 + num2);
         }
     }
 
