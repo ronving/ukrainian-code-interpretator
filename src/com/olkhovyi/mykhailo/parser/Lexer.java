@@ -59,7 +59,13 @@ public class Lexer {
             buffer.append(current);
             current = next();
         }
-        addToken(TokenType.WORD, buffer.toString());
+        if(buffer.toString().equals("вивести")) {
+            addToken(TokenType.PRINT, "");
+        }
+        else {
+            addToken(TokenType.WORD, buffer.toString());
+        }
+
     }
 
     private void tokenizeNumber() {

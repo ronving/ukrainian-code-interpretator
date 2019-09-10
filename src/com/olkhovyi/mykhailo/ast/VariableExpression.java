@@ -2,10 +2,10 @@ package com.olkhovyi.mykhailo.ast;
 
 import com.olkhovyi.mykhailo.lib.Variables;
 
-public class ConstantExpression implements Expression {
+public class VariableExpression implements Expression {
     private final String name;
 
-    public ConstantExpression(String name) {
+    public VariableExpression(String name) {
         this.name = name;
     }
 
@@ -17,6 +17,6 @@ public class ConstantExpression implements Expression {
 
     @Override
     public String toString() {
-        return String.format("%f", Variables.get(name));
+        return String.format("%s", name);
     }
 }

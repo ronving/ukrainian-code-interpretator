@@ -6,6 +6,8 @@ public enum TokenType {
     HEX,
     WORD,
 
+    PRINT,
+
     PLUS,
     MINUS,
     STAR,

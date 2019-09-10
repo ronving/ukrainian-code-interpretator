@@ -23,6 +23,8 @@ public class Main {
             System.out.println(token);
         }
 
+        System.out.println("--------------------------------");
+
         final List<Statement> statements = new Parser(tokens).parse();
         for (Statement statement : statements) {
             System.out.println(statement);

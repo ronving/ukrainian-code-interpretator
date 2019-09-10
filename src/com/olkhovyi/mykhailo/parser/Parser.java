@@ -27,6 +27,9 @@ public class Parser {
     }
 
     private Statement statement() {
+        if(match(TokenType.PRINT)) {
+            return new PrintStatement(expression());
+        }
         return assignmentStatement();
     }
 
@@ -95,7 +98,7 @@ public class Parser {
             return new NumberExpression(Long.parseLong(current.getText(), 16));
         }
         if (match(TokenType.WORD)) {
-            return new ConstantExpression(current.getText());
+            return new VariableExpression(current.getText());
         }
         if (match(TokenType.LPAREN)) {
             Expression result =  expression();
