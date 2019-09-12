@@ -61,8 +61,8 @@ public class Lexer {
                 current = next();
                 switch (current) {
                     case '"': current = next(); buffer.append('"'); continue;
-                    case 'n': current = next(); buffer.append('\n'); continue;
-                    case 't': current = next(); buffer.append('\t'); continue;
+                    case 'н': current = next(); buffer.append('\n'); continue;
+                    case 'т': current = next(); buffer.append('\t'); continue;
                 }
                 buffer.append('\\');
                 continue;

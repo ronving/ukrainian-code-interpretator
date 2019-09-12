@@ -19,16 +19,18 @@ public class Main {
         final String input = new String(Files.readAllBytes(Paths.get("code.txt")), "UTF-8");
         final List<Token> tokens = new Lexer(input).tokenize();
 
-        for (Token token : tokens) {
-            System.out.println(token);
-        }
-
-        System.out.println("--------------------------------");
-
-        final List<Statement> statements = new Parser(tokens).parse();
-        for (Statement statement : statements) {
-            System.out.println(statement);
-        }
+//        for (Token token : tokens) {
+//            System.out.println(token);
+//        }
+//
+//        System.out.println("--------------------------------");
+//
+       final List<Statement> statements = new Parser(tokens).parse();
+//        for (Statement statement : statements) {
+//            System.out.println(statement);
+//        }
+//
+//        System.out.println("--------------------------------");
 
         for(Statement statement : statements) {
             statement.execute();
