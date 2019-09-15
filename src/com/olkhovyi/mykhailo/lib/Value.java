@@ -1,6 +1,6 @@
 package com.olkhovyi.mykhailo.lib;
 
 public interface Value {
-    double asDouble();
+    double asNumber();
     String asString();
 }

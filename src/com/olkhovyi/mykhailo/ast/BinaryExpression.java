@@ -27,7 +27,7 @@ public final class BinaryExpression implements Expression {
                 case '*': {
 
                     StringBuilder buffer = new StringBuilder();
-                    final int iterates = (int)val2.asDouble();
+                    final int iterates = (int)val2.asNumber();
 
                     for(int i = 0; i < iterates; i++) {
                         buffer.append(str1);
@@ -41,8 +41,8 @@ public final class BinaryExpression implements Expression {
             }
         }
 
-        final double num1 = val1.asDouble();
-        final double num2 = val2.asDouble();
+        final double num1 = val1.asNumber();
+        final double num2 = val2.asNumber();
 
         switch(operation) {
             case '-': return new NumberValue(num1 - num2);

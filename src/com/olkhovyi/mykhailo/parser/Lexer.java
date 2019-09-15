@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lexer {
-    private static final String OPERATOR_CHARS = "+-*/()=";
+    private static final String OPERATOR_CHARS = "+-*/()=<>";
     private static final TokenType[] OPERATOR_TOKENS = {
         TokenType.PLUS, TokenType.MINUS,
         TokenType.STAR, TokenType.SLASH,
         TokenType.LPAREN, TokenType.RPAREN,
-        TokenType.EQ,
+        TokenType.EQ, TokenType.LT, TokenType.GT
     };
 
     private final String input;
@@ -88,13 +88,15 @@ public class Lexer {
             buffer.append(current);
             current = next();
         }
-        if(buffer.toString().equals("вивести")) {
-            addToken(TokenType.PRINT, "");
-        }
-        else {
-            addToken(TokenType.WORD, buffer.toString());
-        }
 
+        final String word = buffer.toString();
+        switch (word) {
+            case "вивести": addToken(TokenType.PRINT); break;
+            case "якщо": addToken(TokenType.IF); break;
+            case "або": addToken(TokenType.ELSE); break;
+                default:
+                    addToken(TokenType.WORD, word); break;
+        }
     }
 
     private void tokenizeNumber() {

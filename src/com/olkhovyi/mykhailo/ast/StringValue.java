@@ -11,7 +11,7 @@ public class StringValue implements Value {
     }
 
     @Override
-    public double asDouble() {
+    public double asNumber() {
         try {
             return Double.parseDouble(value);
         }

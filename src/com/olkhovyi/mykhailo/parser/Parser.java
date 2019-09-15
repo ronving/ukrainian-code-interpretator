@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Parser {
 
-    private static final Token EOF = new Token(TokenType.EOF, null);
+    private static final Token EOF = new Token(TokenType.EOF, "");
 
     private List<Token> tokens;
     private int pos;
@@ -30,8 +30,12 @@ public class Parser {
         if(match(TokenType.PRINT)) {
             return new PrintStatement(expression());
         }
+        if(match(TokenType.IF)) {
+            return ifElse();
+        }
         return assignmentStatement();
     }
+
 
     private Statement assignmentStatement() {
         final Token current = get(0);
@@ -43,9 +47,46 @@ public class Parser {
         throw new RuntimeException("Невідомий оператор");
     }
 
-    private Expression expression() {
-        return additive();
+    private Statement ifElse() {
+        final Expression condition = expression();
+        final Statement ifStatement = statement();
+        final Statement elseStatement;
+
+        if (match(TokenType.ELSE)) {
+            elseStatement = statement();
+        }
+        else {
+            elseStatement = null;
+        }
+        return new IfElseStatement(condition, ifStatement, elseStatement);
     }
+
+    private Expression expression() {
+        return conditional();
+    }
+
+    private Expression conditional() {
+        Expression result = additive();
+
+        while (true) {
+            if (match(TokenType.EQ)) {
+                result =  new ConditionalExpression('=', result, additive());
+                continue;
+            }
+            if (match(TokenType.LT)) {
+                result = new ConditionalExpression('<', result, additive());
+                continue;
+            }
+            if (match(TokenType.GT)) {
+                result = new ConditionalExpression('>', result, additive());
+                continue;
+            }
+            break;
+        }
+
+        return result;
+    }
+
     private Expression additive() {
         Expression result = multiplicative();
 
