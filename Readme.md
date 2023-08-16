@@ -1,6 +1,6 @@
-# Ukrainian Codeeee 
+# Ukrainian Code Interpretator
 
-write the code in Ukrainian 
+A little fun pet project with the purpose to code in the Ukrainian language.
 
 ## Installation
 
